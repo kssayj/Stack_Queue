@@ -3,27 +3,27 @@
 using namespace std;
 struct Stack
 {
-	int top; //индекс верхнего элемента стека
+	int top; 
 	int* data;
 };
 
-void InitStack(Stack& steck, int capacity) //функция инициализации стека
+void InitStack(Stack& steck, int capacity) 
 {
 	steck.data = new int[capacity];
 	steck.top = -1;
 }
 
-void push(Stack& steck, int value) //функция добавления элементов в стек
+void push(Stack& steck, int value) 
 {
 	steck.data[++steck.top] = value;
 }
 
-int pop(Stack& steck) //функция удаления элементов из стека
+int pop(Stack& steck) 
 {
 	return steck.data[steck.top--];
 }
 
-void nullStack(Stack& steck) //функция обнуления стека
+void nullStack(Stack& steck) 
 {
 	steck.top = -1;
 }
@@ -33,11 +33,11 @@ bool EmptyStack(Stack& steck)
 	return steck.top == -1;
 }
 
-void print(Stack& steck) //функция вывода элементов стека в консоль
+void print(Stack& steck) 
 {
 	if (!EmptyStack(steck))
 	{
-		int i = steck.top; //i - кол-во элементов в стеке
+		int i = steck.top; 
 		while (i >= 0)
 		{
 			cout << steck.data[i--] << " ";
@@ -45,46 +45,46 @@ void print(Stack& steck) //функция вывода элементов стека в консоль
 	}
 	else
 	{
-		cout << "Пустой стек";
+		cout << "ГЏГіГ±ГІГ®Г© Г±ГІГҐГЄ";
 	}
 }
 
 struct Queue
 {
-	int tail; //индекс последнего элемента в очереди
-	int head; //индекс начального элемента в очереди
-	int size; //размер очереди
+	int tail; 
+	int head; 
+	int size; 
 	int* data;
 };
 
-void nullQueue(Queue& queue) //функция обнуления очереди
+void nullQueue(Queue& queue) 
 {
 	queue.head = 0;
 	queue.tail = queue.size - 1;
 }
 
-void InitQueue(Queue& queue, int capacity) //функция инициализации очереди 
+void InitQueue(Queue& queue, int capacity) 
 {
 	queue.size = capacity + 1;
 	queue.data = new int[queue.size];
 	nullQueue(queue);
 }
 
-int next(Queue& queue, int n) //функция перехода на следующий индекс элемента очереди
+int next(Queue& queue, int n) 
 {
 	return (n + 1) % queue.size;
 }
 
-bool Empty(Queue& queue) //функция, проверяющая на отсутствие элементов очереди
+bool Empty(Queue& queue) 
 {
 	return next(queue, queue.tail) == queue.head;
 }
 
-void add(Queue& queue, int value) //функция добавления элементов в очередь
+void add(Queue& queue, int value) 
 {
 	if (next(queue, next(queue, queue.tail)) == queue.head)
 	{
-		cout << "Очередь переполнена" << endl;
+		cout << "The queue is overflowing" << endl;
 	}
 	else
 	{
@@ -93,11 +93,11 @@ void add(Queue& queue, int value) //функция добавления элементов в очередь
 	}
 }
 
-int del(Queue& queue) //удаление элементов из очереди
+int del(Queue& queue) 
 {
 	if (Empty(queue))
 	{
-		cout << "Пустая очередь" << endl;
+		cout << "empty queue" << endl;
 		return 0;
 	}
 	else
@@ -108,7 +108,7 @@ int del(Queue& queue) //удаление элементов из очереди
 	}
 }
 
-void print(Queue& queue) //функция вывода элементов очереди в консоль
+void print(Queue& queue) 
 {
 	if (!Empty(queue))
 	{
@@ -121,7 +121,7 @@ void print(Queue& queue) //функция вывода элементов очереди в консоль
 		cout << queue.data[queue.tail];
 	}
 	else {
-		cout << "Пустая очередь";
+		cout << "empty queue";
 	}
 }
 
@@ -132,26 +132,26 @@ int main()
 	double average = 0;
 	int capacity_1, capacity_2;
 	random_device rd;
-	capacity_1 = rd() % 31; //задаем размер для первого стека
-	capacity_2 = rd() % 31; //задаем размер для второго стека
+	capacity_1 = rd() % 31; 
+	capacity_2 = rd() % 31; 
 	Stack first;
 	InitStack(first, capacity_1);
-	for (int i = capacity_1; i > 0; i--) //заполняем первый стек значениями 
+	for (int i = capacity_1; i > 0; i--)
 	{
 		stackValue = rd() % 31;
 		push(first, stackValue);
 	}
-	cout << "Первый стек: ";
+	cout << "First stack: ";
 	print(first);
 	cout << endl;
 	Stack second;
 	InitStack(second, capacity_2);
-	for (int i = capacity_2; i > 0; i--) //заполняем второй стек значениями
+	for (int i = capacity_2; i > 0; i--) 
 	{
 		stackValue = rd() % 31;
 		push(second, stackValue);
 	}
-	cout << "Второй стек: ";
+	cout << "Second stack: ";
 	print(second);
 	cout << endl << endl;
 	if (!EmptyStack(second)) {
@@ -159,16 +159,16 @@ int main()
 		{
 			average += second.data[i];
 		}
-		cout << "Количество элементов второго стека: " << second.top + 1 << endl;
-		cout << "Сумма элементов второго стэка: " << average;
-		average /= second.top + 1; //Среднее арифметическое элементов второго стэка
+		cout << "The amount of elements of the second stack: " << second.top + 1 << endl;
+		cout << "The sum of the elements of the second stack: " << average;
+		average /= second.top + 1; 
 		cout << endl;
-		cout << "Среднее арифметическое второго стека: " << average << endl;
+		cout << "The arithmetic mean of the second stack: " << average << endl;
 	}
-	else cout << "\nЗначение среднего арифметического было не найдено, так как второй стек пуст" << endl;
+	else cout << "\nThe arithmetic mean value was not found because the second stack is empty" << endl;
 	Queue queue;
 	InitQueue(queue, capacity_1);
-	for (int i = 0; i < first.top + 1; i++) //заполняем очередь значениями из второго стека, которые меньше среднего арифметического
+	for (int i = 0; i < first.top + 1; i++) 
 	{
 		if (first.data[i] < average)
 		{
@@ -176,7 +176,7 @@ int main()
 		}
 	}
 	cout << endl;
-	cout << "Очередь: ";
+	cout << "Queue: ";
 	print(queue);
 	cout << endl << endl;
 }
